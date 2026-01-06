@@ -1,5 +1,6 @@
 // ============================================
-// FILE: src/Components/PortalDashboard.jsx (FULLY INTEGRATED)
+// FILE: src/Components/PortalDashboard.jsx
+// Complete with Official Wallet Icons
 // ============================================
 import React, { useState, useEffect, useCallback } from 'react';
 import { Icons } from './Icons';
@@ -178,7 +179,6 @@ const PortalDashboard = ({ currentUser, onEditProfile, onLogout, formData }) => 
     
     try {
       const result = await addToGoogleWallet(formData, publicCardUrl);
-      // Google Wallet opens automatically, show confirmation
       setTimeout(() => {
         setWalletMessage(result.message);
         setShowWalletModal(true);
@@ -366,36 +366,48 @@ const PortalDashboard = ({ currentUser, onEditProfile, onLogout, formData }) => 
                 💳 Wallet Actions
               </h6>
               <div className="d-grid gap-2">
+                {/* Apple Wallet */}
                 <button 
                   onClick={handleAppleWallet}
                   className="wallet-btn apple-wallet"
                   disabled={cardStatus !== 'Published' || isGeneratingWallet}
                 >
-                  <span className="wallet-icon">🍎</span>
+                  <svg className="wallet-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                  </svg>
                   <span className="wallet-text">
                     {isGeneratingWallet ? 'Generating...' : 'Add to Apple Wallet'}
                   </span>
                   <span className="wallet-arrow">→</span>
                 </button>
                 
+                {/* Google Wallet */}
                 <button 
                   onClick={handleGoogleWallet}
                   className="wallet-btn google-wallet"
                   disabled={cardStatus !== 'Published' || isGeneratingWallet}
                 >
-                  <span className="wallet-icon">📱</span>
+                  <svg className="wallet-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21.8 10.5c0-.4 0-.8-.1-1.1H12v2.2h5.5c-.2 1.2-1 2.2-2.1 2.9v1.8h3.4c2-1.8 3-4.5 3-5.8z"/>
+                    <path d="M12 22c2.8 0 5.2-.9 6.9-2.5l-3.4-2.6c-.9.6-2.1 1-3.5 1-2.7 0-5-1.8-5.8-4.3H2.7v2.7C4.4 19.6 7.9 22 12 22z"/>
+                    <path d="M6.2 13.6c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V6.9H2.7C2 8.3 1.6 9.6 1.6 11s.4 2.7 1.1 3.9l3.5-2.7z"/>
+                    <path d="M12 5.2c1.5 0 2.9.5 3.9 1.5l2.9-2.9C17.2 2.2 14.8 1 12 1 7.9 1 4.4 3.4 2.7 6.9l3.5 2.7C7 7.1 9.3 5.2 12 5.2z"/>
+                  </svg>
                   <span className="wallet-text">
                     {isGeneratingWallet ? 'Generating...' : 'Add to Google Wallet'}
                   </span>
                   <span className="wallet-arrow">→</span>
                 </button>
                 
+                {/* Samsung Wallet */}
                 <button 
                   onClick={handleSamsungWallet}
                   className="wallet-btn samsung-wallet"
                   disabled={cardStatus !== 'Published' || isGeneratingWallet}
                 >
-                  <span className="wallet-icon">📲</span>
+                  <svg className="wallet-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M5.5 2c-1.4 0-2.5 1.1-2.5 2.5v15c0 1.4 1.1 2.5 2.5 2.5h13c1.4 0 2.5-1.1 2.5-2.5v-15C21 3.1 19.9 2 18.5 2h-13zm6.5 4c2.8 0 5 2.2 5 5s-2.2 5-5 5-5-2.2-5-5 2.2-5 5-5zm0 2c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z"/>
+                  </svg>
                   <span className="wallet-text">
                     {isGeneratingWallet ? 'Generating...' : 'Add to Samsung Wallet'}
                   </span>
@@ -414,7 +426,9 @@ const PortalDashboard = ({ currentUser, onEditProfile, onLogout, formData }) => 
                 className="wallet-btn qr-btn"
                 disabled={cardStatus !== 'Published'}
               >
-                <span className="wallet-icon">📱</span>
+                <svg className="wallet-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+                </svg>
                 <span className="wallet-text">Generate QR Code</span>
                 <span className="wallet-arrow">→</span>
               </button>
@@ -637,7 +651,9 @@ const PortalDashboard = ({ currentUser, onEditProfile, onLogout, formData }) => 
         }
 
         .wallet-icon {
-          font-size: 1.3rem;
+          width: 24px;
+          height: 24px;
+          flex-shrink: 0;
         }
 
         .wallet-text {
@@ -662,6 +678,10 @@ const PortalDashboard = ({ currentUser, onEditProfile, onLogout, formData }) => 
         .apple-wallet:not(:disabled):hover {
           background: rgba(0, 122, 255, 0.1);
           border-color: rgba(0, 122, 255, 0.5);
+        }
+
+        .google-wallet:not(:disabled) {
+          border-color: rgba(66, 133, 244, 0.3);
         }
 
         .google-wallet:not(:disabled) {

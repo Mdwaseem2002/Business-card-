@@ -1,5 +1,5 @@
 // ============================================
-// FILE: src/App.jsx (FINAL - Clean Design + Advanced Features)
+// FILE: src/App.jsx (FIXED - Privacy Navigation)
 // ============================================
 import React, { useState, useEffect, useCallback } from "react";
 import "./index.css";
@@ -131,6 +131,15 @@ const App = () => {
           setCurrentView('login');
           updateURL('/login');
         }
+      } else if (path === '/onboarding') {
+        if (currentUser) {
+          setCurrentView('onboarding');
+        } else {
+          setCurrentView('login');
+          updateURL('/login');
+        }
+      } else if (path === '/privacy') {
+        setCurrentView('privacy');
       } else if (path === '/login') {
         setCurrentView('login');
       } else if (path === '/signup') {
@@ -193,6 +202,12 @@ const App = () => {
         } else if (path === '/portal' || path === '/dashboard') {
           console.log('→ Showing portal');
           setCurrentView('portal');
+        } else if (path === '/onboarding') {
+          console.log('→ Showing onboarding/edit');
+          setCurrentView('onboarding');
+        } else if (path === '/privacy') {
+          console.log('→ Showing privacy');
+          setCurrentView('privacy');
         } else if (path === '/profile') {
           console.log('→ Showing profile');
           setCurrentView('profile');
@@ -316,6 +331,26 @@ const App = () => {
     updateURL('/portal');
   };
 
+  // FIXED: Privacy navigation handlers
+  const navigateToPrivacy = () => {
+    console.log('📍 Navigating to privacy...');
+    setCurrentView('privacy');
+    updateURL('/privacy');
+  };
+
+  const navigateBackToProfile = () => {
+    console.log('📍 Navigating back to profile...');
+    setCurrentView('profile');
+    updateURL('/profile');
+  };
+
+  // FIXED: Edit profile navigation handler
+  const navigateToEditProfile = () => {
+    console.log('📍 Navigating to edit profile...');
+    setCurrentView('onboarding');
+    updateURL('/onboarding');
+  };
+
   // Loading State
   if (loading && !authChecked) {
     return (
@@ -400,9 +435,9 @@ const App = () => {
             formData={formData}
             avatarPreview={avatarPreview}
             bannerPreview={bannerPreview}
-            onEdit={() => setCurrentView('onboarding')}
+            onEdit={navigateToEditProfile}
             onLogout={handleLogout}
-            onPrivacyClick={() => setCurrentView('privacy')}
+            onPrivacyClick={navigateToPrivacy}
             onPortalClick={navigateToPortal}
             currentUser={currentUser}
           />
@@ -412,14 +447,14 @@ const App = () => {
           <PortalDashboard 
             currentUser={currentUser}
             formData={formData}
-            onEditProfile={() => setCurrentView('onboarding')}
+            onEditProfile={navigateToEditProfile}
             onLogout={handleLogout}
           />
         )}
 
         {currentView === 'privacy' && (
           <PrivacyNoticeView 
-            onBack={() => setCurrentView('profile')} 
+            onBack={navigateBackToProfile}
           />
         )}
 
