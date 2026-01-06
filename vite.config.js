@@ -1,3 +1,7 @@
+// ============================================
+// FILE 6: vite.config.js
+// Save as: vite.config.js (in root)
+// ============================================
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -12,18 +16,5 @@ export default defineConfig({
         changeOrigin: true
       }
     }
-  },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: undefined,
-        assetFileNames: 'assets/[name]-[hash][extname]',
-        chunkFileNames: 'assets/[name]-[hash].js',
-        entryFileNames: 'assets/[name]-[hash].js'
-      }
-    },
-    sourcemap: false,
-    minify: 'esbuild',
-    target: 'esnext'
   }
 })
